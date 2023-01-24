@@ -4,7 +4,7 @@ class Api::V1::VoicesController < ApplicationController
   # GET /voices
   def index
     @voices = Voice.all
-    if @voices
+    if @voices 
       render json: { message: 'Voices fetched successfully', data: @voices }, status: :ok
     else
       render json: { message: 'No voices found', errors: @voices.errors.full_messages }, status: :not_found
