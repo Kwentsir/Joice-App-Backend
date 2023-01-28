@@ -12,7 +12,8 @@ class Api::V1::JournalsController < ApplicationController
   end
 
   def create
-    @journal = Journal.new(journal_params)
+    @journal = Journal.new(journal_params.merge(user: User.find(params[:user_id]),
+                                                voice: Voice.find(params[:voice_id])))
     if @journal.save
       render json: { message: 'Journal created successfully', data: @journal }, status: :created
     else
@@ -46,6 +47,6 @@ class Api::V1::JournalsController < ApplicationController
   end
 
   def journal_params
-    params.require(:journal).permit(:user_id, :voice_id, :file_name, :transcribed_text, :date)
+    params.require(:journal).permit(:file_name, :transcribed_text, :date)
   end
 end

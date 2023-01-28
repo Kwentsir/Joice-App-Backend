@@ -6,7 +6,7 @@ class User < ApplicationRecord
          :jwt_authenticatable, jwt_revocation_strategy: self
 
   has_many :journals, dependent: :destroy
-  has_many :voice, dependent: :destroy
+  has_many :voices, dependent: :destroy
 
   validates :email, presence: true, uniqueness: true
 end

@@ -4,7 +4,7 @@ class Api::V1::VoicesController < ApplicationController
   # GET /voices
   def index
     @voices = Voice.all
-    if @voices 
+    if @voices
       render json: { message: 'Voices fetched successfully', data: @voices }, status: :ok
     else
       render json: { message: 'No voices found', errors: @voices.errors.full_messages }, status: :not_found
@@ -12,7 +12,7 @@ class Api::V1::VoicesController < ApplicationController
   end
 
   def create
-    @voice = Voice.new(voice_params)
+    @voice = Voice.new(voice_params.merge(user: User.find(params[:user_id])))
     if @voice.save
       render json: { message: 'Voice created successfully', data: @voice }, status: :created
     else
@@ -46,6 +46,6 @@ class Api::V1::VoicesController < ApplicationController
   end
 
   def voice_params
-    params.require(:voice).permit(:user_id, :file_name, :voice_file, :date)
+    params.require(:voice).permit(:file_name, :voice_file, :date)
   end
 end

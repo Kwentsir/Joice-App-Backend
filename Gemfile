@@ -63,4 +63,3 @@ end
 
 gem 'rails-controller-testing'
 gem 'rspec-activemodel-mocks'
-gem 'factory_bot_rails'
