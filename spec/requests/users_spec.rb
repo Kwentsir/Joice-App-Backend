@@ -1,44 +1,104 @@
 require 'swagger_helper'
 
-RSpec.describe 'users', type: :request do
-    describe 'POST /signup' do
-  context 'when valid parameters are passed' do
-    let(:user_params) do
-      {
-        email: 'test@example.com',
-        password: 'password',
-        password_confirmation: 'password'
-      }
-    end
-
-    it 'creates a new user and returns a 201 response' do
-      post '/signup', params: user_params
-      expect(response).to have_http_status(:unprocessable_entity)
-    end
-  end
-end
-
-describe 'POST /login' do
-  context 'when valid parameters are passed' do
-    let(:user_params) do
-      {
-        email: 'test@example.com',
-        password: 'password'
-      }
-    end
-
-    it 'logs in the user and returns a 200 response' do
-      post '/login', params: user_params
-      expect(response).to have_http_status(:unauthorized)
+RSpec.describe 'user', type: :request do
+  path '/signup' do
+    post 'Signup a user' do
+      response(200, 'successful') do
+        after do |example|
+          example.metadata[:response][:content] = {
+            'application/json' => {
+              example: JSON.parse(response.body, symbolize_names: true)
+            }
+          }
+        end
+        run_test!
+      end
     end
   end
-end
 
-def user_from_token
-  return unless request.headers['Authorization'].present?
-  jwt_payload = JWT.decode(request.headers['Authorization'].split[1],
-                           Rails.application.credentials.devise[:jwt_secret_key]).first
-  User.find(jwt_payload['sub'])
-end
+  path '/signup/sign_up' do
+    get 'Retrieves a user' do
+      response(200, 'successful') do
+        after do |example|
+          example.metadata[:response][:content] = {
+            'application/json' => {
+              example: JSON.parse(response.body, symbolize_names: true)
+            }
+          }
+        end
+        run_test!
+      end
+    end
+  end
 
+  path '/signup' do # rubocop:todo Metrics/BlockLength
+    # You'll want to customize the parameter types...
+    parameter name: 'id', in: :path, type: :string, description: 'id'
+
+    patch('update user') do
+      response(200, 'successful') do
+        let(:id) { '123' }
+
+        after do |example|
+          example.metadata[:response][:content] = {
+            'application/json' => {
+              example: JSON.parse(response.body, symbolize_names: true)
+            }
+          }
+        end
+        run_test!
+      end
+    end
+
+    put('update user') do
+      response(200, 'successful') do
+        let(:id) { '123' }
+
+        after do |example|
+          example.metadata[:response][:content] = {
+            'application/json' => {
+              example: JSON.parse(response.body, symbolize_names: true)
+            }
+          }
+        end
+        run_test!
+      end
+    end
+
+    delete('delete user') do
+      response(200, 'successful') do
+        let(:id) { '123' }
+
+        after do |example|
+          example.metadata[:response][:content] = {
+            'application/json' => {
+              example: JSON.parse(response.body, symbolize_names: true)
+            }
+          }
+        end
+        run_test!
+      end
+    end
+  end
+
+  path '/login' do
+    # You'll want to customize the parameter types...
+    parameter name: 'id', in: :path, type: :string, description: 'id'
+
+
+    post('login user') do
+      response(200, 'successful') do
+        let(:id) { '123' }
+
+        after do |example|
+          example.metadata[:response][:content] = {
+            'application/json' => {
+              example: JSON.parse(response.body, symbolize_names: true)
+            }
+          }
+        end
+        run_test!
+      end
+    end
+  end
 end

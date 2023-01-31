@@ -1,6 +1,6 @@
-# fly.toml file generated for audioscribe-backend on 2023-01-27T21:51:33Z
+# fly.toml file generated for audioscribe on 2023-01-30T12:52:08Z
 
-app = "audioscribe-backend"
+app = "audioscribe"
 kill_signal = "SIGINT"
 kill_timeout = 5
 processes = []
