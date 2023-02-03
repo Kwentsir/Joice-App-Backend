@@ -7,11 +7,15 @@ paths:
   "/api/v1/journals":
     get:
       summary: list journals
+      tags:
+      - Journals
       responses:
         '200':
           description: successful
     post:
       summary: create journal
+      tags:
+      - Journals
       parameters:
       - name: user_id
         in: query
@@ -64,11 +68,15 @@ paths:
         type: string
     get:
       summary: show journal
+      tags:
+      - Journals
       responses:
         '200':
           description: successful
     patch:
       summary: update journal
+      tags:
+      - Journals
       parameters: []
       responses:
         '200':
@@ -103,6 +111,8 @@ paths:
                       type: string
     put:
       summary: update journal
+      tags:
+      - Journals
       parameters: []
       responses:
         '200':
@@ -137,17 +147,23 @@ paths:
                       type: string
     delete:
       summary: delete journal
+      tags:
+      - Journals
       responses:
         '200':
           description: successful
   "/api/v1/voices":
     get:
       summary: list voices
+      tags:
+      - Voices
       responses:
         '200':
           description: successful
     post:
       summary: create voice
+      tags:
+      - Voices
       parameters:
       - name: user_id
         in: query
@@ -195,11 +211,15 @@ paths:
         type: string
     get:
       summary: show voice
+      tags:
+      - Voices
       responses:
         '200':
           description: successful
     patch:
       summary: update voice
+      tags:
+      - Voices
       parameters: []
       responses:
         '200':
@@ -234,6 +254,8 @@ paths:
                       type: string
     put:
       summary: update voice
+      tags:
+      - Voices
       parameters: []
       responses:
         '200':
@@ -268,12 +290,16 @@ paths:
                       type: string
     delete:
       summary: delete voice
+      tags:
+      - Voices
       responses:
         '200':
           description: successful
   "/signup":
     post:
       summary: Signup a user
+      tags:
+      - Signup
       parameters: []
       responses:
         '200':
@@ -313,6 +339,8 @@ paths:
   "/signup/sign_up":
     get:
       summary: Retrieves a user
+      tags:
+      - Users
       responses:
         '200':
           description: successful
@@ -326,6 +354,8 @@ paths:
         type: string
     patch:
       summary: update user
+      tags:
+      - Users
       parameters: []
       responses:
         '200':
@@ -368,6 +398,8 @@ paths:
                       type: string
     put:
       summary: update user
+      tags:
+      - Users
       parameters: []
       responses:
         '200':
@@ -410,12 +442,16 @@ paths:
                       type: string
     delete:
       summary: delete user
+      tags:
+      - Users
       responses:
         '200':
           description: successful
   "/login":
     post:
       summary: login user
+      tags:
+      - Login
       parameters: []
       responses:
         '200':
@@ -445,7 +481,7 @@ paths:
                     password:
                       type: string
 servers:
-- url: http://{defaultHost}
+- url: https://{defaultHost}
   variables:
     defaultHost:
-      default: localhost:3000
+      default: audioscribe.fly.dev

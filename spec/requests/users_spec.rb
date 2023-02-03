@@ -3,6 +3,7 @@ require 'swagger_helper'
 RSpec.describe 'user', type: :request do
   path '/signup' do
     post 'Signup a user' do
+      tags 'Signup'
       consumes 'application/json', 'application/xml'
       parameter name: :user, in: :body, schema: {
         type: :object,
@@ -33,6 +34,7 @@ RSpec.describe 'user', type: :request do
 
   path '/signup/sign_up' do
     get 'Retrieves a user' do
+      tags 'Users'
       response(200, 'successful') do
         after do |example|
           example.metadata[:response][:content] = {
@@ -51,6 +53,7 @@ RSpec.describe 'user', type: :request do
     parameter name: 'id', in: :path, type: :string, description: 'id'
 
     patch('update user') do
+      tags 'Users'
         consumes 'application/json', 'application/xml'
       parameter name: :user, in: :body, schema: {
         type: :object,
@@ -82,6 +85,7 @@ RSpec.describe 'user', type: :request do
     end
 
     put('update user') do
+      tags 'Users'
       consumes 'application/json', 'application/xml'
       parameter name: :user, in: :body, schema: {
         type: :object,
@@ -113,6 +117,7 @@ RSpec.describe 'user', type: :request do
     end
 
     delete('delete user') do
+      tags 'Users'
       response(200, 'successful') do
         let(:id) { '123' }
 
@@ -132,6 +137,7 @@ RSpec.describe 'user', type: :request do
     # You'll want to customize the parameter types...
   
     post('login user') do
+      tags 'Login'     
       consumes 'application/json', 'application/xml'
       parameter name: :user, in: :body, schema: {
         type: :object,

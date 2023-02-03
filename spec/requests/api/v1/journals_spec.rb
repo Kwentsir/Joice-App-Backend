@@ -3,6 +3,7 @@ require 'swagger_helper'
 RSpec.describe 'api/v1/journals', type: :request do
   path '/api/v1/journals' do
     get('list journals') do
+      tags 'Journals'
       response(200, 'successful') do
         after do |example|
           example.metadata[:response][:content] = {
@@ -16,6 +17,7 @@ RSpec.describe 'api/v1/journals', type: :request do
     end
 
     post('create journal') do
+      tags 'Journals'
       parameter name: 'user_id', in: :query, type: :string, description: 'user_id'
       parameter name: 'voice_id', in: :query, type: :string, description: 'voice_id'
       consumes 'application/json', 'application/xml'
@@ -50,6 +52,7 @@ RSpec.describe 'api/v1/journals', type: :request do
     parameter name: 'id', in: :path, type: :string, description: 'id'
 
     get('show journal') do
+      tags 'Journals'
       response(200, 'successful') do
         let(:id) { '123' }
 
@@ -65,6 +68,7 @@ RSpec.describe 'api/v1/journals', type: :request do
     end
 
     patch('update journal') do
+      tags 'Journals'
       consumes 'application/json', 'application/xml'
       parameter name: :journal, in: :body, schema: {
         type: :object,
@@ -94,6 +98,7 @@ RSpec.describe 'api/v1/journals', type: :request do
     end
 
     put('update journal') do
+      tags 'Journals'
       consumes 'application/json', 'application/xml'
       parameter name: :journal, in: :body, schema: {
         type: :object,
@@ -123,6 +128,7 @@ RSpec.describe 'api/v1/journals', type: :request do
     end
 
     delete('delete journal') do
+      tags 'Journals'
       response(200, 'successful') do
         let(:id) { '123' }
 
