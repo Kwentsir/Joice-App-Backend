@@ -12,9 +12,48 @@ paths:
           description: successful
     post:
       summary: create journal
+      parameters:
+      - name: user_id
+        in: query
+        description: user_id
+        schema:
+          type: string
+      - name: voice_id
+        in: query
+        description: voice_id
+        schema:
+          type: string
       responses:
         '200':
           description: successful
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                journal:
+                  type: object
+                  properties:
+                    file_name:
+                      type: string
+                    transcribed_text:
+                      type: string
+                    date:
+                      type: string
+          application/xml:
+            schema:
+              type: object
+              properties:
+                journal:
+                  type: object
+                  properties:
+                    file_name:
+                      type: string
+                    transcribed_text:
+                      type: string
+                    date:
+                      type: string
   "/api/v1/journals/{id}":
     parameters:
     - name: id
@@ -30,14 +69,72 @@ paths:
           description: successful
     patch:
       summary: update journal
+      parameters: []
       responses:
         '200':
           description: successful
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                journal:
+                  type: object
+                  properties:
+                    file_name:
+                      type: string
+                    transcribed_text:
+                      type: string
+                    date:
+                      type: string
+          application/xml:
+            schema:
+              type: object
+              properties:
+                journal:
+                  type: object
+                  properties:
+                    file_name:
+                      type: string
+                    transcribed_text:
+                      type: string
+                    date:
+                      type: string
     put:
       summary: update journal
+      parameters: []
       responses:
         '200':
           description: successful
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                journal:
+                  type: object
+                  properties:
+                    file_name:
+                      type: string
+                    transcribed_text:
+                      type: string
+                    date:
+                      type: string
+          application/xml:
+            schema:
+              type: object
+              properties:
+                journal:
+                  type: object
+                  properties:
+                    file_name:
+                      type: string
+                    transcribed_text:
+                      type: string
+                    date:
+                      type: string
     delete:
       summary: delete journal
       responses:
@@ -51,9 +148,43 @@ paths:
           description: successful
     post:
       summary: create voice
+      parameters:
+      - name: user_id
+        in: query
+        description: user_id
+        schema:
+          type: string
       responses:
         '200':
           description: successful
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                voice:
+                  type: object
+                  properties:
+                    file_name:
+                      type: string
+                    voice_file:
+                      type: string
+                    date:
+                      type: string
+          application/xml:
+            schema:
+              type: object
+              properties:
+                voice:
+                  type: object
+                  properties:
+                    file_name:
+                      type: string
+                    voice_file:
+                      type: string
+                    date:
+                      type: string
   "/api/v1/voices/{id}":
     parameters:
     - name: id
@@ -69,14 +200,72 @@ paths:
           description: successful
     patch:
       summary: update voice
+      parameters: []
       responses:
         '200':
           description: successful
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                voice:
+                  type: object
+                  properties:
+                    file_name:
+                      type: string
+                    voice_file:
+                      type: string
+                    date:
+                      type: string
+          application/xml:
+            schema:
+              type: object
+              properties:
+                voice:
+                  type: object
+                  properties:
+                    file_name:
+                      type: string
+                    voice_file:
+                      type: string
+                    date:
+                      type: string
     put:
       summary: update voice
+      parameters: []
       responses:
         '200':
           description: successful
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                voice:
+                  type: object
+                  properties:
+                    file_name:
+                      type: string
+                    voice_file:
+                      type: string
+                    date:
+                      type: string
+          application/xml:
+            schema:
+              type: object
+              properties:
+                voice:
+                  type: object
+                  properties:
+                    file_name:
+                      type: string
+                    voice_file:
+                      type: string
+                    date:
+                      type: string
     delete:
       summary: delete voice
       responses:
@@ -85,9 +274,49 @@ paths:
   "/signup":
     post:
       summary: Signup a user
+      parameters: []
       responses:
         '200':
           description: successful
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                user:
+                  type: object
+                  properties:
+                    first_name:
+                      type: string
+                    last_name:
+                      type: string
+                    email:
+                      type: string
+                    password:
+                      type: string
+          application/xml:
+            schema:
+              type: object
+              properties:
+                user:
+                  type: object
+                  properties:
+                    first_name:
+                      type: string
+                    last_name:
+                      type: string
+                    email:
+                      type: string
+                    password:
+                      type: string
+  "/signup/sign_up":
+    get:
+      summary: Retrieves a user
+      responses:
+        '200':
+          description: successful
+  "/signup/{id}":
     parameters:
     - name: id
       in: path
@@ -97,40 +326,126 @@ paths:
         type: string
     patch:
       summary: update user
+      parameters: []
       responses:
         '200':
           description: successful
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                user:
+                  type: object
+                  properties:
+                    first_name:
+                      type: string
+                    last_name:
+                      type: string
+                    email:
+                      type: string
+                    password:
+                      type: string
+                    profile_picture:
+                      type: string
+          application/xml:
+            schema:
+              type: object
+              properties:
+                user:
+                  type: object
+                  properties:
+                    first_name:
+                      type: string
+                    last_name:
+                      type: string
+                    email:
+                      type: string
+                    password:
+                      type: string
+                    profile_picture:
+                      type: string
     put:
       summary: update user
+      parameters: []
       responses:
         '200':
           description: successful
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                user:
+                  type: object
+                  properties:
+                    first_name:
+                      type: string
+                    last_name:
+                      type: string
+                    email:
+                      type: string
+                    password:
+                      type: string
+                    profile_picture:
+                      type: string
+          application/xml:
+            schema:
+              type: object
+              properties:
+                user:
+                  type: object
+                  properties:
+                    first_name:
+                      type: string
+                    last_name:
+                      type: string
+                    email:
+                      type: string
+                    password:
+                      type: string
+                    profile_picture:
+                      type: string
     delete:
       summary: delete user
       responses:
         '200':
           description: successful
-  "/signup/sign_up":
-    get:
-      summary: Retrieves a user
-      responses:
-        '200':
-          description: successful
   "/login":
-    parameters:
-    - name: id
-      in: path
-      description: id
-      required: true
-      schema:
-        type: string
     post:
       summary: login user
+      parameters: []
       responses:
         '200':
           description: successful
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                user:
+                  type: object
+                  properties:
+                    email:
+                      type: string
+                    password:
+                      type: string
+          application/xml:
+            schema:
+              type: object
+              properties:
+                user:
+                  type: object
+                  properties:
+                    email:
+                      type: string
+                    password:
+                      type: string
 servers:
-- url: https://{defaultHost}
+- url: http://{defaultHost}
   variables:
     defaultHost:
-      default: audioscribe.fly.dev/
+      default: localhost:3000

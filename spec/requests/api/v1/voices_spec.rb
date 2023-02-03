@@ -16,6 +16,21 @@ RSpec.describe 'api/v1/voices', type: :request do
     end
 
     post('create voice') do
+      parameter name: 'user_id', in: :query, type: :string, description: 'user_id'
+      consumes 'application/json', 'application/xml'
+      parameter name: :voice, in: :body, schema: {
+        type: :object,
+        properties: {
+          voice: {
+            type: :object,
+            properties: {
+              file_name: { type: :string },
+              voice_file: { type: :string },
+              date: { type: :string }
+            }
+          }
+        }
+      }
       response(200, 'successful') do
         after do |example|
           example.metadata[:response][:content] = {
@@ -49,6 +64,20 @@ RSpec.describe 'api/v1/voices', type: :request do
     end
 
     patch('update voice') do
+      consumes 'application/json', 'application/xml'
+       parameter name: :voice, in: :body, schema: {
+        type: :object,
+        properties: {
+          voice: {
+            type: :object,
+            properties: {
+              file_name: { type: :string },
+              voice_file: { type: :string },
+              date: { type: :string }
+            }
+          }
+        }
+      }
       response(200, 'successful') do
         let(:id) { '123' }
 
@@ -64,6 +93,20 @@ RSpec.describe 'api/v1/voices', type: :request do
     end
 
     put('update voice') do
+      consumes 'application/json', 'application/xml'
+       parameter name: :voice, in: :body, schema: {
+        type: :object,
+        properties: {
+          voice: {
+            type: :object,
+            properties: {
+              file_name: { type: :string },
+              voice_file: { type: :string },
+              date: { type: :string }
+            }
+          }
+        }
+      }
       response(200, 'successful') do
         let(:id) { '123' }
 

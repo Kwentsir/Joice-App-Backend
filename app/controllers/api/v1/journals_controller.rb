@@ -1,5 +1,5 @@
 class Api::V1::JournalsController < ApplicationController
-  before_action :set_journal, only: %i[destroy]
+  before_action :set_journal, only: %i[destroy update show]
 
   # GET /journals
   def index
@@ -23,11 +23,20 @@ class Api::V1::JournalsController < ApplicationController
   end
 
   def destroy
+
     if @journal.destroy
       render json: { message: 'Journal deleted successfully', data: @journal }, status: :ok
     else
       render json: { message: 'Failed to delete journal', errors: @journal.errors.full_messages },
              status: :unprocessable_entity
+    end
+  end
+
+  def show
+    if @journal
+      render json: { message: 'Journal fetched successfully', data: @journal }, status: :ok
+    else
+      render json: { message: 'No journal found', errors: @journal.errors.full_messages }, status: :not_found
     end
   end
 

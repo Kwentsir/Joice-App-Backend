@@ -16,6 +16,22 @@ RSpec.describe 'api/v1/journals', type: :request do
     end
 
     post('create journal') do
+      parameter name: 'user_id', in: :query, type: :string, description: 'user_id'
+      parameter name: 'voice_id', in: :query, type: :string, description: 'voice_id'
+      consumes 'application/json', 'application/xml'
+      parameter name: :journal, in: :body, schema: {
+        type: :object,
+        properties: {
+          journal: {
+            type: :object,
+            properties: {
+              file_name: { type: :string },
+              transcribed_text: { type: :string },
+              date: { type: :string }
+            }
+          }
+        }
+      }
       response(200, 'successful') do
         after do |example|
           example.metadata[:response][:content] = {
@@ -49,6 +65,20 @@ RSpec.describe 'api/v1/journals', type: :request do
     end
 
     patch('update journal') do
+      consumes 'application/json', 'application/xml'
+      parameter name: :journal, in: :body, schema: {
+        type: :object,
+        properties: {
+          journal: {
+            type: :object,
+            properties: {
+              file_name: { type: :string },
+              transcribed_text: { type: :string },
+              date: { type: :string }
+            }
+          }
+        }
+      }
       response(200, 'successful') do
         let(:id) { '123' }
 
@@ -64,6 +94,20 @@ RSpec.describe 'api/v1/journals', type: :request do
     end
 
     put('update journal') do
+      consumes 'application/json', 'application/xml'
+      parameter name: :journal, in: :body, schema: {
+        type: :object,
+        properties: {
+          journal: {
+            type: :object,
+            properties: {
+              file_name: { type: :string },
+              transcribed_text: { type: :string },
+              date: { type: :string }
+            }
+          }
+        }
+      }
       response(200, 'successful') do
         let(:id) { '123' }
 
