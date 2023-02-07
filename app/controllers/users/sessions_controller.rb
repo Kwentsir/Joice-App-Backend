@@ -18,7 +18,7 @@ class Users::SessionsController < Devise::SessionsController
                              Rails.application.credentials.devise[:jwt_secret_key]).first
     User.find(jwt_payload['sub'])
     else
-      remder json: { status: 401, message: 'Authorization header missing' }, status: :unathorized
+      render json: { status: 401, message: 'Authorization header missing' }, status: :unathorized
     end
   end
 

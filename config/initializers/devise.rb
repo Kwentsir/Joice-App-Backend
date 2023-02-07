@@ -1,9 +1,5 @@
 # frozen_string_literal: true
 
-Devise.setup do |config|
-  config.jwt_secret_key = Rails.application.credentials.devise[:jwt_secret_key]
-end
-
 # Assuming you have not yet modified this file, each configuration option below
 # is set to its default value. Note that some are commented out while others
 # are not: uncommented lines are intended to protect your configuration from
@@ -312,4 +308,10 @@ Devise.setup do |config|
   # When set to false, does not sign a user in automatically after their password is
   # changed. Defaults to true, so a user is signed in automatically after changing a password.
   # config.sign_in_after_change_password = true
+  config.secret_key = Rails.application.secrets.secret_key_base
+
+config.jwt do |jwt|
+    jwt.secret = ENV['DEVISE_JWT_SECRET_KEY']
+  end
+
 end
