@@ -1,18 +1,15 @@
 class Api::V1::VoicesController < ApplicationController
-  before_action :set_voice, only: %i[destroy]
+  before_action :authenticate_user!
+  before_action :set_voice, only: %i[show destroy update]
 
   # GET /voices
   def index
-    @voices = Voice.all
-    if @voices
-      render json: { message: 'Voices fetched successfully', data: @voices }, status: :ok
-    else
-      render json: { message: 'No voices found', errors: @voices.errors.full_messages }, status: :not_found
-    end
+   @voices = current_user.voices.all
+   render json: { message: 'Voices fetched successfully', data: @voices }, status: :ok
   end
 
   def create
-    @voice = Voice.new(voice_params.merge(user: User.find(params[:user_id])))
+    @voice = current_user.voices.new(voice_params)
     if @voice.save
       render json: { message: 'Voice created successfully', data: @voice }, status: :created
     else
@@ -21,13 +18,19 @@ class Api::V1::VoicesController < ApplicationController
     end
   end
 
-  def destroy
-    if @voice.destroy
-      render json: { message: 'Voice deleted successfully', data: @voice }, status: :ok
+  
+  def show
+    @voice = current_user.voices.find(params[:id])
+    if @voice.present?
+      render json: { status: :ok, message: 'Voice found', data: @voice }, status: :ok
     else
-      render json: { message: 'Failed to delete voice', errors: @voice.errors.full_messages },
-             status: :unprocessable_entity
+      render json: { status: :not_found, message: 'Voice not found'}, status: :not_found
     end
+  end
+
+  def destroy
+    @voice.destroy
+      render json: { message: 'Voice deleted successfully', data: @voice }, status: :ok
   end
 
   def update
@@ -39,10 +42,10 @@ class Api::V1::VoicesController < ApplicationController
     end
   end
 
+  private
+
   def set_voice
-    @voice = Voice.find(params[:id])
-  rescue ActiveRecord::RecordNotFound => e
-    render json: { status: 404, error: e.message }, status: :not_found
+    @voice = current_user.voices.find(params[:id])
   end
 
   def voice_params

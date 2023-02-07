@@ -1,5 +1,5 @@
 class Api::V1::JournalsController < ApplicationController
-  before_action :set_journal, only: %i[destroy update show]
+  before_action :set_journal, :set_user, only: %i[index destroy update show]
 
   # GET /journals
   def index

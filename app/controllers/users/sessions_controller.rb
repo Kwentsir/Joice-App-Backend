@@ -4,7 +4,12 @@ class Users::SessionsController < Devise::SessionsController
   private
 
   def respond_with(_resource, _opts = {})
-    render json: { status: 200, message: 'Login successfully!', user: current_user }, status: :ok
+    if resource.errors.empty?
+    render json: { status: 200, message: 'Login successfully!', user: resource }, status: :ok
+    else
+      render json: { status: 401, message: 'Login failed', errors: resource.errors.full_messages },
+             status: :unathorized
+    end
   end
 
   def user_from_token
@@ -17,10 +22,11 @@ class Users::SessionsController < Devise::SessionsController
     user = user_from_token
 
     if user
+      sign_out user
       render json: { status: 200, message: 'User logged out successfully' }, status: :ok
     else
       render json: { status: 401, message: 'Fail to logout user', errors: resource.errors.full_messages },
-             status: :unprocessable_entity
+             status: :unathorized
     end
   end
 end
