@@ -20,9 +20,9 @@ class Api::V1::VoicesController < ApplicationController
 
   
   def show
-    @voice = current_user.voices.find(params[:id])
-    if @voice.present?
-      render json: { status: :ok, message: 'Voice found', data: @voice }, status: :ok
+    voice = Voice.find_by(id: params[:id])
+    if voice.present?
+      render json: { status: :ok, message: 'Voice found', data: voice }, status: :ok
     else
       render json: { status: :not_found, message: 'Voice not found'}, status: :not_found
     end

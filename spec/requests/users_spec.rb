@@ -32,9 +32,9 @@ RSpec.describe 'user', type: :request do
     end
   end
 
-  path '/signup/sign_up' do
+  path '/users' do
     get 'Retrieves a user' do
-      tags 'Users'
+      tags 'User'
       response(200, 'successful') do
         after do |example|
           example.metadata[:response][:content] = {
@@ -48,12 +48,12 @@ RSpec.describe 'user', type: :request do
     end
   end
 
-  path '/signup/{id}' do # rubocop:todo Metrics/BlockLength
+  path '/users/{id}' do # rubocop:todo Metrics/BlockLength
     # You'll want to customize the parameter types...
     parameter name: 'id', in: :path, type: :string, description: 'id'
 
     patch('update user') do
-      tags 'Users'
+      tags 'User'
         consumes 'application/json', 'application/xml'
       parameter name: :user, in: :body, schema: {
         type: :object,
@@ -85,7 +85,7 @@ RSpec.describe 'user', type: :request do
     end
 
     put('update user') do
-      tags 'Users'
+      tags 'User'
       consumes 'application/json', 'application/xml'
       parameter name: :user, in: :body, schema: {
         type: :object,
@@ -117,7 +117,7 @@ RSpec.describe 'user', type: :request do
     end
 
     delete('delete user') do
-      tags 'Users'
+      tags 'User'
       response(200, 'successful') do
         let(:id) { '123' }
 
