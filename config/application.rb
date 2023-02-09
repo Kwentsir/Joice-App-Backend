@@ -28,5 +28,16 @@ module JoiceAppBackend
     config.middleware.use ActionDispatch::Cookies
 
     config.middleware.use config.session_store, config.session_options
+
+    config.middleware.insert_before 0, Rack::Cors do
+      allow do
+        origins "*"
+
+        resource "*",
+          headers: :any,
+          methods: [:get, :post, :put, :patch, :delete, :options, :head],
+          expose: ['Authorization']
+      end
+    end
   end
 end

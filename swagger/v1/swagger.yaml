@@ -9,6 +9,8 @@ paths:
       summary: list journals
       tags:
       - Journals
+      security:
+      - Bearer: []
       responses:
         '200':
           description: successful
@@ -16,6 +18,8 @@ paths:
       summary: create journal
       tags:
       - Journals
+      security:
+      - Bearer: []
       parameters:
       - name: user_id
         in: query
@@ -70,6 +74,8 @@ paths:
       summary: show journal
       tags:
       - Journals
+      security:
+      - Bearer: []
       responses:
         '200':
           description: successful
@@ -77,6 +83,8 @@ paths:
       summary: update journal
       tags:
       - Journals
+      security:
+      - Bearer: []
       parameters: []
       responses:
         '200':
@@ -113,6 +121,8 @@ paths:
       summary: update journal
       tags:
       - Journals
+      security:
+      - Bearer: []
       parameters: []
       responses:
         '200':
@@ -149,6 +159,8 @@ paths:
       summary: delete journal
       tags:
       - Journals
+      security:
+      - Bearer: []
       responses:
         '200':
           description: successful
@@ -157,6 +169,8 @@ paths:
       summary: list voices
       tags:
       - Voices
+      security:
+      - Bearer: []
       responses:
         '200':
           description: successful
@@ -164,6 +178,8 @@ paths:
       summary: create voice
       tags:
       - Voices
+      security:
+      - Bearer: []
       parameters:
       - name: user_id
         in: query
@@ -213,6 +229,8 @@ paths:
       summary: show voice
       tags:
       - Voices
+      security:
+      - Bearer: []
       responses:
         '200':
           description: successful
@@ -220,6 +238,8 @@ paths:
       summary: update voice
       tags:
       - Voices
+      security:
+      - Bearer: []
       parameters: []
       responses:
         '200':
@@ -256,6 +276,8 @@ paths:
       summary: update voice
       tags:
       - Voices
+      security:
+      - Bearer: []
       parameters: []
       responses:
         '200':
@@ -292,6 +314,8 @@ paths:
       summary: delete voice
       tags:
       - Voices
+      security:
+      - Bearer: []
       responses:
         '200':
           description: successful
@@ -341,6 +365,8 @@ paths:
       summary: Retrieves a user
       tags:
       - User
+      security:
+      - Bearer: []
       responses:
         '200':
           description: successful
@@ -356,6 +382,8 @@ paths:
       summary: update user
       tags:
       - User
+      security:
+      - Bearer: []
       parameters: []
       responses:
         '200':
@@ -400,6 +428,8 @@ paths:
       summary: update user
       tags:
       - User
+      security:
+      - Bearer: []
       parameters: []
       responses:
         '200':
@@ -444,6 +474,8 @@ paths:
       summary: delete user
       tags:
       - User
+      security:
+      - Bearer: []
       responses:
         '200':
           description: successful
@@ -480,8 +512,15 @@ paths:
                       type: string
                     password:
                       type: string
+components:
+  securitySchemes:
+    Bearer:
+      description: Bearer token
+      type: apiKey
+      name: Authorization
+      in: header
 servers:
-- url: https://{defaultHost}
+- url: http://{defaultHost}
   variables:
     defaultHost:
-      default: audioscribe.fly.dev
+      default: localhost:3000

@@ -4,6 +4,7 @@ RSpec.describe 'api/v1/voices', type: :request do
   path '/api/v1/voices' do
     get('list voices') do
       tags 'Voices'
+      security [Bearer: []]
       response(200, 'successful') do
         after do |example|
           example.metadata[:response][:content] = {
@@ -18,6 +19,7 @@ RSpec.describe 'api/v1/voices', type: :request do
 
     post('create voice') do
       tags 'Voices'
+      security [Bearer: []]
       parameter name: 'user_id', in: :query, type: :string, description: 'user_id'
       consumes 'application/json', 'application/xml'
       parameter name: :voice, in: :body, schema: {
@@ -52,6 +54,7 @@ RSpec.describe 'api/v1/voices', type: :request do
 
     get('show voice') do
       tags 'Voices'
+      security [Bearer: []]
       response(200, 'successful') do
         let(:id) { '123' }
 
@@ -68,6 +71,7 @@ RSpec.describe 'api/v1/voices', type: :request do
 
     patch('update voice') do
       tags 'Voices'
+      security [Bearer: []]
       consumes 'application/json', 'application/xml'
        parameter name: :voice, in: :body, schema: {
         type: :object,
@@ -98,6 +102,7 @@ RSpec.describe 'api/v1/voices', type: :request do
 
     put('update voice') do
       tags 'Voices'
+      security [Bearer: []]
       consumes 'application/json', 'application/xml'
        parameter name: :voice, in: :body, schema: {
         type: :object,
@@ -128,6 +133,7 @@ RSpec.describe 'api/v1/voices', type: :request do
 
     delete('delete voice') do
       tags 'Voices'
+      security [Bearer: []]
       response(200, 'successful') do
         let(:id) { '123' }
 

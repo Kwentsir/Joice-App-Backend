@@ -20,15 +20,25 @@ RSpec.configure do |config|
         version: 'v1'
       },
       paths: {},
-      servers: [
-        {
-          url: 'https://{defaultHost}',
-          variables: {
-            defaultHost: {
-              default: 'audioscribe.fly.dev'
-            }
+      components: {
+        securitySchemes: {
+          Bearer: {
+            description: 'Bearer token',
+            type: :apiKey,
+            name: 'Authorization',
+            in: :header
           }
         }
+      },
+      servers: [
+        {
+          url: 'http://{defaultHost}',
+          variables: {
+            defaultHost: {
+              default: 'localhost:3000'
+          }
+        }
+      }
       ]
     }
   }

@@ -35,6 +35,7 @@ RSpec.describe 'user', type: :request do
   path '/users' do
     get 'Retrieves a user' do
       tags 'User'
+      security [Bearer: []]
       response(200, 'successful') do
         after do |example|
           example.metadata[:response][:content] = {
@@ -54,6 +55,7 @@ RSpec.describe 'user', type: :request do
 
     patch('update user') do
       tags 'User'
+      security [Bearer: []]
         consumes 'application/json', 'application/xml'
       parameter name: :user, in: :body, schema: {
         type: :object,
@@ -86,6 +88,7 @@ RSpec.describe 'user', type: :request do
 
     put('update user') do
       tags 'User'
+      security [Bearer: []]
       consumes 'application/json', 'application/xml'
       parameter name: :user, in: :body, schema: {
         type: :object,
@@ -118,6 +121,7 @@ RSpec.describe 'user', type: :request do
 
     delete('delete user') do
       tags 'User'
+      security [Bearer: []]
       response(200, 'successful') do
         let(:id) { '123' }
 
