@@ -1,4 +1,5 @@
 class Api::V1::JournalsController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_journal, :set_user, only: %i[index destroy update show]
 
   # GET /journals

@@ -7,7 +7,7 @@ ruby '3.2.0'
 
 gem 'devise'
 
-gem 'devise-jwt'
+gem 'jwt'
 
 gem 'rswag'
 
