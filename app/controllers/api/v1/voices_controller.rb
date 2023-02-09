@@ -4,6 +4,7 @@ class Api::V1::VoicesController < ApplicationController
 
   # GET /voices
   def index
+   p "current_user #{current_user}"
    @voices = current_user.voices.all
    render json: { message: 'Voices fetched successfully', data: @voices }, status: :ok
   end
